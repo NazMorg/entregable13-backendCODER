@@ -15,7 +15,8 @@ import config from './config/config.js';
 import './config/dbConfig.js';
 import './middlewares/passport.middleware.js';
 import { logger } from './winston.js';
-import {swaggerSetup} from './swaggerSpecs.js';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSetup } from './swaggerSpecs.js';
 
 const app = express();
 const PORT = config.port;
@@ -53,7 +54,7 @@ app.use("/api/carts", cartsRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/api/users", usersRouter);
 app.use("/", viewsRouter);
-app.use("/api/docs", swaggerUi.setup(swaggerSetup));
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 
 const httpServer = app.listen(PORT, () => {
     logger.debug(`Escuchando puerto ${PORT}...`);

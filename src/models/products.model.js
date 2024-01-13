@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
+import config from '../config/config.js';
 
 const productsSchema = new mongoose.Schema({
     title: {
@@ -41,7 +42,7 @@ const productsSchema = new mongoose.Schema({
     ],
     owner: {
         type: String,
-        default: "admin",
+        default: config.adminuser_email,
     }
 })
 
